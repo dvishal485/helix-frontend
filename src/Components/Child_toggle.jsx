@@ -10,7 +10,7 @@ const Child_toggle = (props) => {
     <h3>{props.s0}</h3>
     <div className='child2_inner'>
     <h4>{props.s1}</h4>
-    <ToggleSwitch/>
+    <ToggleSwitch id={props.id} current_value={props.current_value}/>
     </div>
    
     <form >

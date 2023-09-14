@@ -7,7 +7,7 @@ import Child_int from './Components/Child_int';
 import Child_radio from './Components/Child';
 import settings from './settings.json'; // Import the JSON data
 import { useState, useEffect } from 'react';
-// import Child_toggle from './Components/Child_toggle';
+import Child_toggle from './Components/Child_toggle';
 
 function App() {
 
@@ -51,17 +51,25 @@ function App() {
                             {settings.map((setting, index) => (
                                 mapped_config[setting.id] != undefined ? (
                                     setting.value_type === "bool" ? (
-                                        <Child_radio
-                                            myArray={array}
-                                            id={setting.id}
-                                            key={index}
-                                            name={setting.name}
-                                            type={`Type: ${setting.type}`}
-                                            description={`${setting.description}`}
-                                            value_type={`Value Type: ${setting.value_type}`}
-                                            schema={`Schema: ${setting.schema}`}
-                                            current_value={mapped_config[setting.id]}
-                                        />
+                                        (setting.setting_type == "modprobe" || setting.setting_type == "sysctl") ?
+                                            <Child_toggle
+                                                s0={setting.name}
+                                                s1={setting.description}
+                                                current_value={mapped_config[setting.id]}
+                                                id={setting.id}
+                                            />
+                                            :
+                                            <Child_radio
+                                                myArray={array}
+                                                id={setting.id}
+                                                key={index}
+                                                name={setting.name}
+                                                type={`Type: ${setting.type}`}
+                                                description={`${setting.description}`}
+                                                value_type={`Value Type: ${setting.value_type}`}
+                                                schema={`Schema: ${setting.schema}`}
+                                                current_value={mapped_config[setting.id]}
+                                            />
                                     ) : (
                                         setting.value_type === "int" && (
                                             <Child_int
@@ -77,7 +85,7 @@ function App() {
                                             />
                                         )
                                     )
-                                ) : <>man, the setting got purged {JSON.stringify(setting)}<br /></>)
+                                ) : null)
                             )
 
                             }
