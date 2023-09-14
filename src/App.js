@@ -51,7 +51,7 @@ function App() {
                             {settings.map((setting, index) => (
                                 mapped_config[setting.id] != undefined ? (
                                     setting.value_type === "bool" ? (
-                                        (setting.setting_type == "modprobe" || setting.setting_type == "sysctl") ?
+                                        (setting.setting_type == "modprobe" || setting.setting_type == "systemctl") ?
                                             <Child_toggle
                                                 s0={setting.name}
                                                 s1={setting.description}
